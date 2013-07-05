@@ -1,0 +1,12 @@
+<p> Survey Questions</p>
+
+<form method = "POST" action="/make_questions/<%= @survey.id %>">
+<input type="text" name="user[question]">
+
+<div class = 'questions'></div>
+
+<button type="submit">Submit question</button>
+
+</form>
+
+<button type="submit">Add Question</button>

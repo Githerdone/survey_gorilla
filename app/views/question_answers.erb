@@ -1,0 +1,12 @@
+<p> Survey Answers for your question</p>
+
+<form method = "POST" action="/question_answers/<%= @question.id %>">
+<input type="text" name="user[answer]">
+
+<div class = 'answers'></div>
+
+<button type="submit">Submit answer</button>
+
+</form>
+
+<button type="submit">Add Answers</button>
