@@ -1,10 +1,16 @@
 <div>
   <p>Survey Name: <%= @survey.title %></p>
 
-  <% @question_bank.each do |survey| %>
-  <%= survey.question %>
-  <% @answer_bank.each do |question| %>
-  <%= question.answer %>
-  <%end%>
+ <ol>
+  <% @question_bank.each do |question| %>
+ 
+   <li> <%= question.question %></li>
+    <form>
+      <% question.answers.each do |answer| %>
+      <input name="<%= question.id %>" type='radio' value='<%= answer%>' />  <%= answer.answer %><br>
+      <%end%>
+       </form><br>
+   
   <% end %>
+   </ol>
 </div>
