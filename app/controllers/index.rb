@@ -31,6 +31,7 @@ end
 post '/survey_submit' do 
   p "$" * 100
   p params
+  # Response.create(user_id: session[:id], answer_id: params[:id])
   # @user_id.
 end
 

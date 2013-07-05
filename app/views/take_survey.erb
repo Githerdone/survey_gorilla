@@ -6,7 +6,7 @@
     <li> <%= question.question %></li>
   
       <% question.answers.each do |answer| %>
-      <input name="<%= question.id %>" type='radio' value='<%= answer.answer %>' />  <%= answer.answer %><br>
+      <input name="<%= question.id %>" type='radio' value='<%= answer.id %>' />  <%= answer.answer %><br>
       <%end%>
     <br>
     <% end %>
