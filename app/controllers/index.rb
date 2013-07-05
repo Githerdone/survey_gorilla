@@ -27,3 +27,12 @@ post '/take_survey/:id' do
   p @answer_bank = @survey.questions.first.answers
   erb :take_survey
 end
+
+post '/survey_submit' do 
+  p "$" * 100
+  p params
+  # @user_id.
+end
+
+
+# User.first.surveys.first.questions.first.answers.first.responses
