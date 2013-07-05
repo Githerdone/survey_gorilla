@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  #validations
+  validates :email, :presence => true, :email => true
+  validates :name, :password, :presence => true
 
   has_many :surveys
   has_many :responses

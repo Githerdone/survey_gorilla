@@ -18,6 +18,7 @@ gem 'rake'
 gem 'shotgun'
 
 gem 'bcrypt-ruby'
+gem 'valid_email'
 
 group :test do
   gem 'faker'
