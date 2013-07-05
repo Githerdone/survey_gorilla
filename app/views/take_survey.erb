@@ -1,5 +1,10 @@
 <div>
   <p>Survey Name: <%= @survey.title %></p>
 
-  <% @questions = @survey
+  <% @question_bank.each do |survey| %>
+  <%= survey.question %>
+  <% @answer_bank.each do |question| %>
+  <%= question.answer %>
+  <%end%>
+  <% end %>
 </div>
