@@ -1,11 +1,11 @@
 <h1>Welcome to Survey Gorilla, <%= @user.name %>!</h1>
 
-<a href="/create_survey/<%= @user.id %>">Create Survey</a>
+<p><a href="/create_survey/<%= @user.id %>">Create Survey</a></p>
 
 <!-- prints out all the surveys created by user -->
 <% if @surveys %>
   <% @surveys.each do |survey| %>
-    <a href="/take_survey"><%= survey.title %></a><br>
+    <a href="/take_survey/<%= survey.id %>"><%= survey.title %></a><br>
   <% end %>
 <% end %>
 
@@ -13,7 +13,7 @@
 <h2>Your Answered Surveys</h2>
   <% if @surveys %>
     <% @surveys.each do |survey| %>
-      <%= survey %>
+      <p><%= survey.title %></p>
     <%end%>
   <%end%>
 

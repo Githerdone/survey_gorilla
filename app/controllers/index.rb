@@ -18,7 +18,7 @@ get '/make_questions/:id' do |id|
 end
 
 post '/make_questions/:id' do |id|
-	p params
+	# p params
 	@survey = Survey.find(id)
 	params[:survey].each do |question|
 		q_title = question["title"] #q1
@@ -30,20 +30,8 @@ post '/make_questions/:id' do |id|
 			ques.answers << ans
 		end
 	end
-	erb :index
-
+	erb :dashboard
 end
-
-get '/question_answers/:id' do |id|
-	@question = Question.find(id)
-	erb :question_answers
-end
-
-post '/question_answers/:id' do |id|
-	@question = Question.find(id)
-	@answer = @question.answers.create(params[:user])
-end
-
 
 get '/dashboard' do 
   @user = User.find_by_id(session[:id])
