@@ -2,8 +2,8 @@ get '/' do
   erb :index
 end
 
-get '/create_survey/:id' do
-	@user = User.find(1)
+get '/create_survey/:id' do |id|
+	@user = User.find(id)
 	erb :create_survey
 end
 
@@ -18,7 +18,6 @@ get '/make_questions/:id' do |id|
 end
 
 post '/make_questions/:id' do |id|
-	# p params
 	@survey = Survey.find(id)
 	params[:survey].each do |question|
 		q_title = question["title"] #q1
@@ -30,14 +29,17 @@ post '/make_questions/:id' do |id|
 			ques.answers << ans
 		end
 	end
-	erb :dashboard
+	redirect '/dashboard'
 end
 
-get '/dashboard' do 
-  @user = User.find_by_id(session[:id])
-  @surveys = Survey.all
-  @surveys_answered = @user.surveys
-  erb :dashboard
+get '/dashboard' do
+  if current_user
+    @surveys = Survey.all
+    @surveys_answered = @user.surveys
+    erb :dashboard
+  else
+    redirect '/'
+  end
 end
 
 get '/create_survey/:id' do |id|
@@ -66,6 +68,5 @@ post '/survey_submit' do
     redirect '/take_survey/#{:id}'
   end
 end
-
 
 # User.first.surveys.first.questions.first.answers.first.responses

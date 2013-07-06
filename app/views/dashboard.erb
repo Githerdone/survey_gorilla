@@ -2,20 +2,21 @@
 
 <p><a href="/create_survey/<%= @user.id %>">Create Survey</a></p>
 
-<!-- prints out all the surveys created by user -->
+<h2>All Surveys</h2>
+
 <% if @surveys %>
   <% @surveys.each do |survey| %>
     <a href="/take_survey/<%= survey.id %>"><%= survey.title %></a><br>
   <% end %>
 <% end %>
 
-<!-- prints out all the surveys to which user has responded -->
 <h2>Your Answered Surveys</h2>
-  <% if @surveys %>
-    <% @surveys.each do |survey| %>
-      <p><%= survey.title %></p>
-    <%end%>
+
+<% if @surveys_answered %>
+  <% @surveys.each do |survey| %>
+    <p><%= survey.title %></p>
   <%end%>
+<%end%>
 
 
 
