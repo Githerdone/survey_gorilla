@@ -7,8 +7,10 @@
 
 <h2>Your Created Surveys</h2>
 <!-- prints out all the surveys created by user -->
+<% if @surveys %>
 <% @surveys.each do |survey| %>
-  <a href="#"><%= survey.title %></a><br>
+<a href="#"><%= survey.title %></a><br>
+<% end %>
 <% end %>
 
 <h2>Your Answered Surveys</h2>

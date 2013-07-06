@@ -7,9 +7,9 @@ get '/login' do
 end
 
 post '/login' do
-  user = User.find_by_email(params[:login][:email])
-  if user.try(:authenticate, params[:login][:password])
-    session[:user_id] = user.id
+  @user = User.find_by_email(params[:login][:email])
+  if @user.try(:authenticate, params[:login][:password])
+    session[:user_id] = @user.id
     erb :dashboard
   else
     redirect '/login'
@@ -21,8 +21,8 @@ post '/signup' do
     data = {:name => params[:signup][:name],
             :email => params[:signup][:email],
             :password => params[:signup][:password]}
-    user = User.create data
-    session[:user_id] = user.id
+    @user = User.create data
+    session[:user_id] = @user.id
     erb :dashboard
   else
     redirect '/login'
