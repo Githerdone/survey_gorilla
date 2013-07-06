@@ -24,6 +24,7 @@ class CreateTables < ActiveRecord::Migration
     create_table :responses do |t|
       t.integer :user_id
       t.integer :answer_id
+      t.integer :survey_id
     end
   end
 
