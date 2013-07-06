@@ -18,9 +18,20 @@ get '/make_questions/:id' do |id|
 end
 
 post '/make_questions/:id' do |id|
+	p params
 	@survey = Survey.find(id)
-	@question = @survey.questions.create(params[:user])
-	redirect "/question_answers/#{@question.id}"
+	params[:survey].each do |question|
+		q_title = question["title"] #q1
+		ques = Question.create(question: q_title)
+		@survey.questions << ques
+		q_answers = question["answers"] # [a1, a2]
+		q_answers.each do |answer|
+			ans = Answer.create(answer: answer)
+			ques.answers << ans
+		end
+	end
+	erb :index
+
 end
 
 get '/question_answers/:id' do |id|
