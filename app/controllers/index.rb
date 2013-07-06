@@ -52,18 +52,21 @@ get '/take_survey' do
 end
 
 post '/take_survey/:id' do 
+  p "*" * 80
+  p params
   @survey_name = Survey.find(params[:id])
-  p @question_bank = @survey.questions
+  @question_bank = @survey.questions
 
-  p @answer_bank = @survey.questions.first.answers
+  @answer_bank = @survey.questions.first.answers
   erb :take_survey
 end
 
 post '/survey_submit' do 
-  p "$" * 100
-  p params
-  # Response.create(user_id: session[:id], answer_id: params[:id])
-  # @user_id.
+  if params
+    params.values.each do |answer_id|
+      Response.create(user_id: session[user_id], answer_id: answer_id)
+    end
+  end
 end
 
 
