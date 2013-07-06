@@ -16,4 +16,4 @@ question2 = survey1.questions.create :question => "What is your favorite drink?"
 question2.answers.create :answer => "Water"
 answer2 = question2.answers.create :answer => "Beer"
 question2.answers.create :answer => "Wine"
-answer2.responses.create :user_id => user.id
+answer2.responses.create :user_id => user.id, :survey_id => 1

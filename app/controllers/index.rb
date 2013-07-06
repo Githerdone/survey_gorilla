@@ -44,9 +44,11 @@ post '/question_answers/:id' do |id|
 	@answer = @question.answers.create(params[:user])
 end
 
-get '/dashboard/:id' do |id|
-  @user = User.find(id)
-  @surveys = @user.surveys
+
+get '/dashboard' do 
+  @user = User.find_by_id(session[:id])
+  @surveys = Survey.all
+  @surveys_answered = @user.surveys
   erb :dashboard
 end
 
@@ -54,29 +56,26 @@ get '/create_survey/:id' do |id|
   erb :create_survey
 end
 
-get '/take_survey' do
-  @survey = Survey.find(1)  # remove this stuff and put into take_survey post
-  p @question_bank = @survey.questions
-  p '*' * 80
-  p @answer_bank = @survey.questions.first.answers
-  erb :take_survey
+get '/take_survey/:id' do
+    @survey = Survey.find(params[:id])  # remove this stuff and put into take_survey post
+    @question_bank = @survey.questions
+    @answer_bank = @survey.questions.first.answers
+    erb :take_survey
 end
 
-post '/take_survey/:id' do 
-  p "*" * 80
-  p params
-  @survey_name = Survey.find(params[:id])
-  @question_bank = @survey.questions
-
-  @answer_bank = @survey.questions.first.answers
-  erb :take_survey
-end
 
 post '/survey_submit' do 
+
+  survey_id = params.shift.pop
+  p survey_id
+  p params
   if params
     params.values.each do |answer_id|
-      Response.create(user_id: session[user_id], answer_id: answer_id)
+      Response.create(user_id: session[:user_id], survey_id: survey_id,  answer_id: answer_id)
+      redirect '/dashboard'
     end
+  else
+    redirect '/take_survey/#{:id}'
   end
 end
 
