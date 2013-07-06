@@ -33,8 +33,8 @@ post '/question_answers/:id' do |id|
 	@answer = @question.answers.create(params[:user])
 end
 
-get '/dashboard/:id' do |id|
-  @user = User.find(id)
+get '/dashboard' do
+  @user = User.find_by_id(session[:id])
   @surveys = @user.surveys
   erb :dashboard
 end
