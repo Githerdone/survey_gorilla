@@ -33,7 +33,7 @@ post '/question_answers/:id' do |id|
 	@answer = @question.answers.create(params[:user])
 end
 
-get '/dashboard/:id' do |id|
+get '/dashboard' do 
   @user = User.find(id)
   @surveys = @user.surveys
   erb :dashboard
@@ -43,12 +43,12 @@ get '/create_survey/:id' do |id|
   erb :create_survey
 end
 
-get '/take_survey' do
-  @survey = Survey.find(1)  # remove this stuff and put into take_survey post
-  p @question_bank = @survey.questions
-  p '*' * 80
-  p @answer_bank = @survey.questions.first.answers
-  erb :take_survey
+get '/take_survey/:id' do
+
+    @survey = Survey.find(params[:id])  # remove this stuff and put into take_survey post
+    @question_bank = @survey.questions
+    @answer_bank = @survey.questions.first.answers
+    erb :take_survey
 end
 
 post '/take_survey/:id' do 
@@ -64,8 +64,11 @@ end
 post '/survey_submit' do 
   if params
     params.values.each do |answer_id|
-      Response.create(user_id: session[user_id], answer_id: answer_id)
+      Response.create(user_id: session[:user_id], answer_id: answer_id)
+      redirect '/dashboard'
     end
+  else
+    redirect '/take_survey/#{:id}'
   end
 end
 
